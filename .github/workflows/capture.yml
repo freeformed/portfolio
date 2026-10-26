@@ -1,0 +1,42 @@
+name: Capture site from Framer
+
+# Run by hand from the Actions tab. Saves a static copy of the live Framer
+# site into site/ on the "capture" branch, and screenshots comparing it with
+# the live site on the "capture-report" branch.
+on:
+  workflow_dispatch:
+    inputs:
+      origin:
+        description: Site to copy
+        default: https://www.freeformed.com
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: node scripts/capture.mjs "${{ inputs.origin }}"
+      - run: node scripts/verify.mjs "${{ inputs.origin }}"
+      - name: Commit the copy
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mv report /tmp/report
+          git checkout -B capture
+          git add site
+          git commit -m "Capture site from ${{ inputs.origin }}" || echo "No changes"
+          git push -f origin capture
+          git checkout --orphan capture-report
+          git rm -rfq .
+          cp -r /tmp/report/. .
+          git add .
+          git commit -qm "Capture check"
+          git push -f origin capture-report
