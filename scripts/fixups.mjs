@@ -13,6 +13,8 @@ export function fixup(text) {
       // Material icons load from framer.com/m/material-icons/<Name>.js@<version>.
       .replaceAll("https://framer.com/m/material-icons/", "/_framer/m/material-icons/")
       .replace(/\}\.js@[\d.]+`/g, "}.js`")
+      // The contact form posted to Framer's form service; src/contact.js takes over.
+      .replace(/https:\/\/api\.framer\.com\/forms\/v1\/forms\/[\w-]+\/submit/g, "/api/contact")
       // Framer's on-page editor bar only makes sense on Framer hosting.
       .replace(/EditorBar:([\w$]+)===void 0\?void 0:/g, "EditorBar:void 0,_editorBar:")
   );
