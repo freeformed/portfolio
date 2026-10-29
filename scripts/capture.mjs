@@ -29,6 +29,7 @@ const pages = new Map(); // route -> html
 const assets = new Map(); // url (no query) -> Buffer
 const queue = [...SEEDS];
 const seen = new Set();
+const tried = new Set(); // asset urls already requested, including failures
 
 const hostRe = Object.keys(HOSTS).map((h) => h.replace(/\./g, "\\.")).join("|");
 const assetUrlRe = new RegExp(`https?:\\/\\/(?:${hostRe})\\/[^"'\\s)\\\\<>\`]+`, "g");
@@ -50,7 +51,8 @@ function routeFile(route) {
 
 async function fetchAsset(u) {
   const key = stripQuery(u);
-  if (assets.has(key)) return;
+  if (assets.has(key) || tried.has(key)) return;
+  tried.add(key);
   assets.set(key, null);
   try {
     const res = await fetch(key, { headers: { "user-agent": "Mozilla/5.0 site-capture" } });
@@ -157,7 +159,7 @@ async function main() {
         for (const u of relativeImports(key, buf.toString("utf8"))) found.add(u);
       }
     }
-    const fresh = [...found].filter((u) => !assets.has(u));
+    const fresh = [...found].filter((u) => !assets.has(u) && !tried.has(u));
     if (!fresh.length) break;
     console.log(`fetching ${fresh.length} assets`);
     for (let i = 0; i < fresh.length; i += 8) await Promise.all(fresh.slice(i, i + 8).map(fetchAsset));
