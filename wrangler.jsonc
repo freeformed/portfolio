@@ -3,15 +3,11 @@
   "name": "portfolio",
   "compatibility_date": "2026-10-01",
   "main": "src/worker.js",
-  "vars": {
-    // Formspree form endpoint the contact form forwards to, e.g. https://formspree.io/f/abcdwxyz
-    "CONTACT_FORWARD_URL": ""
-  },
   "assets": {
     "directory": "./site",
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/_fc/cms/*", "/api/*"]
+    "run_worker_first": ["/_fc/cms/*"]
   }
 }

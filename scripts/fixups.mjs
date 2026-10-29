@@ -5,6 +5,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const HIDE_FORMS = "<style data-no-forms>form{display:none!important}</style>";
+
 export function fixup(text) {
   return (
     text
@@ -13,8 +15,11 @@ export function fixup(text) {
       // Material icons load from framer.com/m/material-icons/<Name>.js@<version>.
       .replaceAll("https://framer.com/m/material-icons/", "/_framer/m/material-icons/")
       .replace(/\}\.js@[\d.]+`/g, "}.js`")
-      // The contact form posted to Framer's form service; src/contact.js takes over.
-      .replace(/https:\/\/api\.framer\.com\/forms\/v1\/forms\/[\w-]+\/submit/g, "/api/contact")
+      // Erin dropped the contact form (it only drew spam); the email link stays.
+      // Hidden rather than deleted so Framer's scripts still match the page.
+      .replace(/(<\/head>)/, (head) => (text.includes("<form") && !text.includes(HIDE_FORMS) ? HIDE_FORMS + head : head))
+      // Footer year, which Framer had baked into every page.
+      .replaceAll("© 2025 Erin Waddington", "© 2026 Erin Waddington")
       // Framer's on-page editor bar only makes sense on Framer hosting.
       .replace(/EditorBar:([\w$]+)===void 0\?void 0:/g, "EditorBar:void 0,_editorBar:")
   );
@@ -23,7 +28,7 @@ export function fixup(text) {
 async function main() {
   const root = path.resolve("site");
   let changed = 0;
-  for await (const f of fs.glob("**/*.{html,mjs,js}", { cwd: root })) {
+  for await (const f of fs.glob("**/*.{html,mjs,js,json}", { cwd: root })) {
     const file = path.join(root, f);
     const before = await fs.readFile(file, "utf8");
     const after = fixup(before);
