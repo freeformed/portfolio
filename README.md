@@ -1,6 +1,6 @@
 # freeformed.com
 
-Erin Waddington's portfolio, hosted for free on Cloudflare Pages.
+Erin Waddington's portfolio, hosted for free on Cloudflare.
 
 The `site/` folder is the whole website: plain HTML plus the files it uses.
 Cloudflare publishes whatever is in `site/` on the `main` branch.
@@ -22,9 +22,11 @@ Each page is one file: `site/index.html`, `site/about.html`,
 `site/case-studies/stamps-com.html`, and so on. Find the sentence in the file
 and change it. Commit to `main` and Cloudflare publishes it in about a minute.
 
-## Cloudflare Pages settings
+## Cloudflare settings
 
-- Framework preset: None
+The site runs as a Cloudflare Worker serving static files (`wrangler.jsonc`).
+
 - Build command: (leave empty)
-- Build output directory: `site`
+- Deploy command: `npx wrangler deploy`
+- Preview command: `npx wrangler versions upload`
 - Production branch: `main`
