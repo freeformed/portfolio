@@ -8,6 +8,7 @@ import { chromium } from "playwright";
 import http from "node:http";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { sliceRanges } from "../src/framercms.js";
 
 const ORIGIN = (process.argv[2] || "https://www.freeformed.com").replace(/\/$/, "");
 const SITE = path.resolve("site");
@@ -41,8 +42,12 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(404, { "content-type": "text/html" });
     return res.end(await fs.readFile(path.join(SITE, "404.html")).catch(() => "not found"));
   }
+  let body = await fs.readFile(f);
+  // Same byte-range handling as src/worker.js.
+  const range = new URL(req.url, "http://x").searchParams.get("range");
+  if (range && f.endsWith(".framercms")) body = Buffer.from(sliceRanges(body, range));
   res.writeHead(200, { "content-type": TYPES[path.extname(f).toLowerCase()] || "application/octet-stream" });
-  res.end(await fs.readFile(f));
+  res.end(body);
 });
 
 async function shoot(page, url, file) {
@@ -84,6 +89,8 @@ async function main() {
     };
     page.on("request", (r) => {
       const u = new URL(r.url());
+      // Google Analytics is Erin's own tracking and stays.
+      if (/google(tagmanager|-analytics)\.com$/.test(u.hostname)) return;
       if (current && u.hostname !== "localhost" && !u.protocol.startsWith("data")) note(`external: ${r.url()}`);
     });
     page.on("response", (r) => {

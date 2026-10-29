@@ -9,6 +9,7 @@
 import { chromium } from "playwright";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fixup } from "./fixups.mjs";
 
 const ORIGIN = (process.argv[2] || "https://www.freeformed.com").replace(/\/$/, "");
 const OUT = path.resolve("site");
@@ -19,6 +20,8 @@ const HOSTS = {
   "fonts.gstatic.com": "/_gfonts",
   "fonts.googleapis.com": "/_gcss",
 };
+// Framer's icon modules, saved under the same tree as their framer.com URL.
+const ICON_PREFIX = "https://framer.com/m/material-icons/";
 const SITE_HOSTS = new Set(["freeformed.com", "www.freeformed.com"]);
 
 const SEEDS = [
@@ -40,6 +43,7 @@ function stripQuery(u) {
 
 function localPath(u) {
   const url = new URL(stripQuery(u));
+  if (url.href.startsWith(ICON_PREFIX)) return "/_framer" + url.pathname;
   return HOSTS[url.hostname] + url.pathname;
 }
 
@@ -78,6 +82,11 @@ function relativeImports(key, text) {
   for (const m of text.matchAll(/["'`](\.\.?\/[^"'`\s]+?\.m?js)["'`]/g)) {
     out.push(new URL(m[1], key).href);
   }
+  // CMS data files: new URL("./x.framercms", "https://framerusercontent.com/modules/...")
+  // resolves under /cms/ instead of /modules/.
+  for (const m of text.matchAll(/new URL\(`\.\/([^`]+\.framercms)`,`(https:\/\/framerusercontent\.com\/[^`]+)`\)/g)) {
+    out.push(new URL(m[1], m[2]).href.replace("/modules/", "/cms/"));
+  }
   return out;
 }
 
@@ -88,7 +97,7 @@ function rewrite(text) {
   // Links to the site itself become root-relative so preview URLs work too.
   t = t.replace(/https?:\/\/(?:www\.)?freeformed\.com(?=[\/"'?#])/g, "");
   t = t.replace(/(href|content)="(?=["#?])/g, '$1="/');
-  return t;
+  return fixup(t);
 }
 
 function cleanHtml(html) {
@@ -104,10 +113,18 @@ async function main() {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await context.newPage();
 
+  const icons = new Set();
+  page.on("request", (req) => {
+    const u = req.url();
+    if (u.startsWith(ICON_PREFIX)) icons.add(u.split("@")[0].replace(/\.js$/, "") + ".js|" + u);
+  });
+
   page.on("response", async (res) => {
     try {
       const u = new URL(res.url());
-      if (HOSTS[u.hostname] && res.request().method() === "GET" && res.ok()) {
+      // CMS files are requested in byte ranges; those get fetched whole later.
+      if (u.pathname.endsWith(".framercms")) return;
+      if (HOSTS[u.hostname] && res.request().method() === "GET" && res.status() === 200) {
         const key = stripQuery(res.url());
         if (!assets.get(key)) assets.set(key, await res.body());
       }
@@ -149,8 +166,19 @@ async function main() {
   }
   await browser.close();
 
+  // Icon modules redirect to framerusercontent.com; save the module at a .js path.
+  for (const entry of icons) {
+    const [key, u] = entry.split("|");
+    const res = await fetch(u).catch(() => null);
+    if (res?.ok) assets.set(key, Buffer.from(await res.arrayBuffer()));
+    else console.warn(`  ! icon ${u}`);
+  }
+
   // Pull in every CDN file referenced from pages, CSS and JS until nothing new turns up.
-  let pending = [...pages.values()];
+  let pending = [
+    ...pages.values(),
+    ...[...assets].filter(([k, b]) => b && isText(k)).map(([, b]) => b.toString("utf8")),
+  ];
   for (;;) {
     const found = new Set();
     for (const text of pending) for (const m of text.matchAll(assetUrlRe)) found.add(stripQuery(m[0]));

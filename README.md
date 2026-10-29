@@ -25,6 +25,8 @@ and change it. Commit to `main` and Cloudflare publishes it in about a minute.
 ## Cloudflare settings
 
 The site runs as a Cloudflare Worker serving static files (`wrangler.jsonc`).
+The only code, `src/worker.js`, answers the byte-range requests Framer's CMS
+makes for its data files under `/_fc/cms/`.
 
 - Build command: (leave empty)
 - Deploy command: `npx wrangler deploy`
