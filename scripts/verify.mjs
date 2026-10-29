@@ -55,7 +55,7 @@ async function shoot(page, url, file) {
     window.scrollTo(0, 0);
   });
   await page.waitForTimeout(1500);
-  await page.screenshot({ path: file, fullPage: true });
+  await page.screenshot({ path: file, fullPage: true, type: "jpeg", quality: 60 });
 }
 
 async function main() {
@@ -94,10 +94,10 @@ async function main() {
       const name = (route === "/" ? "home" : route.slice(1).replace(/\//g, "__")) + `.${label}`;
       current = "";
       if (label === "desktop" || route.split("/").length <= 2) {
-        await shoot(page, ORIGIN + route, path.join(REPORT, `${name}.live.png`));
+        await shoot(page, ORIGIN + route, path.join(REPORT, `${name}.live.jpg`));
       }
       current = route;
-      await shoot(page, `http://localhost:${PORT}${route}`, path.join(REPORT, `${name}.copy.png`));
+      await shoot(page, `http://localhost:${PORT}${route}`, path.join(REPORT, `${name}.copy.jpg`));
       current = "";
     }
     lines.push(`## ${label}`);

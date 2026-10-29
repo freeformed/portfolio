@@ -35,7 +35,7 @@ jobs:
           git commit -m "Capture site from ${{ inputs.origin }}" || echo "No changes"
           git push -f origin capture
           git checkout --orphan capture-report
-          git rm -rfq .
+          git rm -rfq . && git clean -fdxq
           cp -r /tmp/report/. .
           git add .
           git commit -qm "Capture check"
