@@ -46,7 +46,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 async function shoot(page, url, file) {
-  await page.goto(url, { waitUntil: "networkidle" }).catch(() => {});
+  await page.goto(url, { waitUntil: "load", timeout: 30000 }).catch(() => {});
   await page.evaluate(async () => {
     for (let y = 0; y < document.body.scrollHeight; y += 400) {
       window.scrollTo(0, y);
@@ -54,7 +54,8 @@ async function shoot(page, url, file) {
     }
     window.scrollTo(0, 0);
   });
-  await page.waitForTimeout(1500);
+  await page.waitForLoadState("networkidle", { timeout: 8000 }).catch(() => {});
+  await page.waitForTimeout(1000);
   await page.screenshot({ path: file, fullPage: true, type: "jpeg", quality: 60 });
 }
 

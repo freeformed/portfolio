@@ -126,14 +126,14 @@ async function main() {
     pages.set(route, await res.text());
 
     // Load it in a real browser so lazily loaded chunks, fonts and media show up.
-    await page.goto(ORIGIN + route, { waitUntil: "networkidle" }).catch(() => {});
+    await page.goto(ORIGIN + route, { waitUntil: "load", timeout: 30000 }).catch(() => {});
     await page.evaluate(async () => {
       for (let y = 0; y < document.body.scrollHeight; y += 400) {
         window.scrollTo(0, y);
         await new Promise((r) => setTimeout(r, 120));
       }
     });
-    await page.waitForLoadState("networkidle").catch(() => {});
+    await page.waitForLoadState("networkidle", { timeout: 8000 }).catch(() => {});
 
     for (const href of await page.$$eval("a[href]", (as) => as.map((a) => a.href))) {
       try {
