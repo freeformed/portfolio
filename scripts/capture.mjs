@@ -187,7 +187,7 @@ async function main() {
         for (const u of relativeImports(key, buf.toString("utf8"))) found.add(u);
       }
     }
-    const fresh = [...found].filter((u) => !assets.has(u) && !tried.has(u));
+    const fresh = [...found].filter((u) => !u.endsWith("/") && !assets.has(u) && !tried.has(u));
     if (!fresh.length) break;
     console.log(`fetching ${fresh.length} assets`);
     for (let i = 0; i < fresh.length; i += 8) await Promise.all(fresh.slice(i, i + 8).map(fetchAsset));
@@ -201,10 +201,14 @@ async function main() {
     await fs.writeFile(file, rewrite(cleanHtml(html)));
   }
   for (const [key, buf] of assets) {
-    if (!buf) continue;
+    if (!buf || key.endsWith("/")) continue;
     const file = path.join(OUT, localPath(key));
-    await fs.mkdir(path.dirname(file), { recursive: true });
-    await fs.writeFile(file, isText(key) ? rewrite(buf.toString("utf8")) : buf);
+    try {
+      await fs.mkdir(path.dirname(file), { recursive: true });
+      await fs.writeFile(file, isText(key) ? rewrite(buf.toString("utf8")) : buf);
+    } catch (e) {
+      console.warn(`  ! could not save ${key}: ${e.message}`);
+    }
   }
   console.log(`saved ${pages.size} pages and ${[...assets.values()].filter(Boolean).length} assets to ${OUT}`);
 }
