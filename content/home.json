@@ -1,0 +1,68 @@
+{
+  "title": "Erin Waddington - Portfolio",
+  "description": "Erin Waddington is designer and creative director Austin, TX",
+  "heading": "I'm Erin, a designer & creative director based in Austin.",
+  "subheading": "(Occasionally I do yardwork and make wine.)",
+  "work_label": "Some stuff I did.",
+  "work_link": "more case studies",
+  "hat_label": "Whats under the hat?",
+  "hat_groups": [
+    {
+      "image": "/media/brain-1.svg",
+      "items": [
+        "Design Thinking",
+        "Process Wonk",
+        "Creative Mentorship",
+        "OKRs > KPIs",
+        "Pixel Perfect"
+      ]
+    },
+    {
+      "image": "/media/brain-2.svg",
+      "items": [
+        "Brand Champion",
+        "Creative Direction",
+        "Typography Nerd",
+        "Visual / UI / UX Design",
+        "Fermenting Something Tasty"
+      ]
+    }
+  ],
+  "soft_skills_label": "Soft Skills",
+  "soft_skills": [
+    "Creative Direction",
+    "Design Thinking",
+    "Design Systems",
+    "Visual Design",
+    "Branding",
+    "UI/UX Design",
+    "Typography",
+    "Process Development",
+    "Vendor & Agency Management",
+    "Project Management",
+    "Storyboarding",
+    "Video & Photo Shoot Direction",
+    "Copy Direction",
+    "Team Management",
+    "Creative Mentorship"
+  ],
+  "hard_skills_label": "Hard Skills",
+  "hard_skills": [
+    "Adobe Creative Cloud",
+    "Adobe Photoshop",
+    "Adobe InDesign",
+    "Adobe Illustrator",
+    "Figma",
+    "FigJam",
+    "Jira",
+    "DAM",
+    "Wordpress",
+    "Framer",
+    "Canva",
+    "Generative AI",
+    "Agentic AI",
+    "Google Suite"
+  ],
+  "contact_text": "I'd love to talk shop or anything else you may have on your mind. Let's get a beer or coffee!",
+  "contact_link": "Here's how."
+}

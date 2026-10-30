@@ -2,31 +2,43 @@
 
 Erin Waddington's portfolio, hosted for free on Cloudflare.
 
-The `site/` folder is the whole website: plain HTML plus the files it uses.
-Cloudflare publishes whatever is in `site/` on the `main` branch.
+## Editing the site
 
-## How the copy was made
+Use [Pages CMS](https://app.pagescms.org): sign in with GitHub and open
+`freeformed/portfolio`. Every save is a commit to GitHub, and Cloudflare
+publishes it about a minute later.
 
-`site/` is a static copy of the original Framer site, made by
-`scripts/capture.mjs`. It keeps Framer's own HTML, CSS, fonts and scripts, so
-the design and animations look the same, but nothing loads from Framer any more.
-Files from Framer's CDN live under `site/_fc/`.
+- **Case studies** and **More work**: one entry per project. "Position in the
+  list" sets the order; "Show on the home page" picks the case studies on the
+  home page. A new entry's file name becomes its address, e.g.
+  `/case-studies/stamps-com`.
+- **Home page**, **About page**, **Contact page**, **Other page text**: the
+  words on those pages.
+- **Site settings**: name, menu, footer, email, LinkedIn/Behance links, link
+  preview image and Google Analytics.
+- Images and videos go in the media library (the `media/` folder). Images are
+  shown at half their pixel size, so export them at 2x. In "More work" content,
+  a Vimeo or YouTube link on a line of its own becomes a video player.
 
-To make a fresh copy (only while the Framer site is still live), open
-**Actions → Capture site from Framer → Run workflow**. It writes the copy to the
-`capture` branch and before/after screenshots to the `capture-report` branch.
+## How it's built
 
-## Editing text later
+[Eleventy](https://www.11ty.dev) turns the content into plain HTML.
 
-Each page is one file: `site/index.html`, `site/about.html`,
-`site/case-studies/stamps-com.html`, and so on. Find the sentence in the file
-and change it. Commit to `main` and Cloudflare publishes it in about a minute.
+- `content/`: everything editable (Markdown and JSON). `.pages.yml` describes
+  it to Pages CMS.
+- `media/`: images, videos and the CV.
+- `src/`: page templates (`*.njk`), styles (`css/site.css`), the small script
+  for the phone menu and testimonial slider (`js/site.js`), and fonts.
+
+To work on it locally: `npm install`, then `npm start` and open
+http://localhost:8080. `npm run build` writes the finished site to `_site/`.
 
 ## Cloudflare settings
 
-The site runs as a Cloudflare Worker serving static files (`wrangler.jsonc`).
-The only code, `src/worker.js`, answers the byte-range requests Framer's CMS
-makes for its data files under `/_fc/cms/`.
+The site is a Cloudflare Worker that only serves static files
+(`wrangler.jsonc`). `npx wrangler deploy` runs `npm run build` first (the
+`build` setting in `wrangler.jsonc`) and uploads `_site/`, so the Workers Builds
+settings stay as they are:
 
 - Build command: (leave empty)
 - Deploy command: `npx wrangler deploy`

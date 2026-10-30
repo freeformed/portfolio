@@ -1,0 +1,26 @@
+---
+layout: base.njk
+bodyClass: more-work-item
+pagination:
+  data: cms.moreWork
+  size: 1
+  alias: w
+permalink: "/more-work/{{ w.slug }}.html"
+---
+{%- set labels = cms.pages.more_work -%}
+<section class="mw-hero">
+  <a class="back muted" href="/more-work">{{ labels.back }}</a>
+  <div class="mw-head">
+    <p class="muted">{{ w.year }}</p>
+    <h1 class="h-display">{{ w.title }}</h1>
+    {%- if w.intro %}<p class="lead">{{ w.intro }}</p>{% endif %}
+  </div>
+</section>
+<div class="rich{% if not w.intro %} no-intro{% endif %}">
+{{ w.html | safe }}
+</div>
+<section class="mw-more">
+  <p class="muted">{{ labels.list_label }}</p>
+  {%- set items = cms.moreWork | reject("equalto", w) %}
+  {% include "work-list.njk" %}
+</section>

@@ -1,0 +1,43 @@
+---
+layout: base.njk
+bodyClass: case-study
+pagination:
+  data: cms.caseStudies
+  size: 1
+  alias: cs
+permalink: "/case-studies/{{ cs.slug }}.html"
+---
+{%- set labels = cms.pages.case_studies -%}
+<section class="cs-hero">
+  <h1 class="h-page">{{ cs.title }}</h1>
+  <a class="accent" href="/case-studies">{{ labels.see_all }}</a>
+</section>
+<img class="cs-cover" src="{{ cs.cover }}" alt="">
+<section class="cs-details">
+  <dl class="cs-info">
+    {%- if cs.ask %}<div><dt>The ask</dt><dd class="ask">{{ cs.ask }}</dd></div>{% endif %}
+    {%- if cs.wins and cs.wins.length %}<div><dt>The wins</dt><dd><ul>{% for w in cs.wins %}<li>{{ w }}</li>{% endfor %}</ul></dd></div>{% endif %}
+    {%- if cs.services and cs.services.length %}<div><dt>Info</dt><dd>{% for s in cs.services %}{{ s }}{% if not loop.last %}<br>{% endif %}{% endfor %}</dd></div>{% endif %}
+    {%- if cs.year %}<div><dt>Year</dt><dd>{{ cs.year }}</dd></div>{% endif %}
+    {%- if cs.credits %}<div><dt>Credits</dt><dd>{{ cs.credits | trim | escape | replace("\n", "<br>") | safe }}</dd></div>{% endif %}
+  </dl>
+  <div class="cs-gallery">
+    {%- for g in cs.gallery %}
+    {%- if g.video %}
+    <video src="{{ g.video }}" autoplay loop muted playsinline preload="metadata"></video>
+    {%- elif g.image %}
+    <img src="{{ g.image }}" alt="" loading="lazy">
+    {%- endif %}
+    {%- if g.caption %}<p class="caption">{{ g.caption }}</p>{% endif %}
+    {%- endfor %}
+  </div>
+</section>
+{%- if cs.next %}
+<a class="cs-next" href="/case-studies/{{ cs.next.slug }}">
+  <div>
+    <p class="muted">{{ labels.next_label }}</p>
+    <h2 class="h-display">{{ cs.next.title }}</h2>
+  </div>
+  <img src="{{ cs.next.cover }}" alt="" loading="lazy">
+</a>
+{%- endif %}

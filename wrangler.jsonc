@@ -1,13 +1,14 @@
-// Cloudflare Workers settings: serves the files in site/ as a static website.
+// Cloudflare Workers settings: builds the site with Eleventy and serves the
+// result (_site/) as static files.
 {
   "name": "portfolio",
   "compatibility_date": "2026-10-01",
-  "main": "src/worker.js",
+  "build": {
+    "command": "npm run build"
+  },
   "assets": {
-    "directory": "./site",
-    "binding": "ASSETS",
+    "directory": "./_site",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "404-page",
-    "run_worker_first": ["/_fc/cms/*"]
+    "not_found_handling": "404-page"
   }
 }

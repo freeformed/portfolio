@@ -1,0 +1,17 @@
+---js
+{
+  layout: "base.njk",
+  permalink: "/case-studies.html",
+  bodyClass: "case-studies",
+  eleventyComputed: {
+    title: (data) => data.cms?.pages?.case_studies?.title,
+    description: (data) => data.cms?.pages?.case_studies?.description,
+  },
+}
+---
+<h1 class="h-page">{{ cms.pages.case_studies.heading | escape | string | replace("/", '<span class="slash">/</span>') | safe }}</h1>
+<div class="cards">
+  {%- for item in cms.caseStudies %}
+  {% include "card.njk" %}
+  {%- endfor %}
+</div>

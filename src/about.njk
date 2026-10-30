@@ -1,0 +1,58 @@
+---js
+{
+  layout: "base.njk",
+  permalink: "/about.html",
+  bodyClass: "about",
+  eleventyComputed: {
+    title: (data) => data.cms?.about?.title,
+    description: (data) => data.cms?.about?.description,
+  },
+}
+---
+{%- set about = cms.about -%}
+<h1 class="h-page offset">{{ about.heading }}</h1>
+<section class="row">
+  <p class="label small">{{ about.info_label }}</p>
+  <div>
+    <div class="about-info">
+      {%- for p in about.info %}<p class="lead">{{ p }}</p>{% endfor %}
+    </div>
+    <div class="about-links">
+      {%- if about.cv %}
+      <a class="cv-button" href="{{ about.cv }}" download target="_blank"><svg viewBox="0 0 256 256" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M228 152v56a20 20 0 0 1-20 20H48a20 20 0 0 1-20-20v-56a12 12 0 0 1 24 0v52h152v-52a12 12 0 0 1 24 0Zm-108.49 8.49a12 12 0 0 0 17 0l40-40a12 12 0 0 0-17-17L140 123V40a12 12 0 0 0-24 0v83l-19.51-19.49a12 12 0 0 0-17 17Z"/></svg>{{ about.cv_label }}</a>
+      {%- endif %}
+      {% include "social.njk" %}
+    </div>
+  </div>
+</section>
+{%- if about.testimonials and about.testimonials.length %}
+<section class="row">
+  <p class="label small">{{ about.testimonials_label }}</p>
+  <div class="slider" data-slider>
+    <ul class="slides">
+      {%- for t in about.testimonials %}
+      <li>
+        <blockquote>{{ t.quote }}</blockquote>
+        <p class="who">{{ t.name }}</p>
+        <p class="who-title">{{ t.title }}</p>
+      </li>
+      {%- endfor %}
+    </ul>
+    <div class="dots">
+      {%- for t in about.testimonials %}<button type="button" aria-label="Show quote {{ loop.index }}"></button>{% endfor %}
+    </div>
+  </div>
+</section>
+{%- endif %}
+{%- for section in [["career_label", "career"], ["education_label", "education"], ["certifications_label", "certifications"]] %}
+{%- if about[section[1]] and about[section[1]].length %}
+<section class="row">
+  <p class="label small">{{ about[section[0]] }}</p>
+  <ul class="timeline">
+    {%- for r in about[section[1]] %}
+    <li><span class="t-title">{{ r.title }}</span><span class="t-meta">{{ r.place }}</span><span class="t-meta">{{ r.dates }}</span></li>
+    {%- endfor %}
+  </ul>
+</section>
+{%- endif %}
+{%- endfor %}

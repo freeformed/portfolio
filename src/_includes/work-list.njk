@@ -1,0 +1,5 @@
+<ul class="work-list">
+  {%- for w in items %}
+  <li><a href="/more-work/{{ w.slug }}"><span>{{ w.title }}</span><span class="year">{{ w.year }}</span></a></li>
+  {%- endfor %}
+</ul>
