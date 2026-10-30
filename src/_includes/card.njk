@@ -1,0 +1,5 @@
+<a class="card" href="/case-studies/{{ item.slug }}">
+  <img src="{{ item.cover }}" alt="" loading="lazy">
+  <h2>{{ item.title }}</h2>
+  <p class="tags">{% for s in item.services %}{% if not loop.first %}<span class="slash">/</span>{% endif %}<span>{{ s }}</span>{% endfor %}</p>
+</a>

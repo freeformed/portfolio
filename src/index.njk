@@ -1,0 +1,48 @@
+---js
+{
+  layout: "base.njk",
+  permalink: "/index.html",
+  bodyClass: "home",
+  eleventyComputed: {
+    title: (data) => data.cms?.home?.title,
+    description: (data) => data.cms?.home?.description,
+  },
+}
+---
+{%- set home = cms.home -%}
+<section class="hero">
+  <h1 class="h-display">{{ home.heading }}</h1>
+  <p class="lead">{{ home.subheading }}</p>
+</section>
+<section class="works">
+  <div class="section-head">
+    <p class="label">{{ home.work_label }}</p>
+    <a class="accent" href="/case-studies">{{ home.work_link }}</a>
+  </div>
+  <div class="cards">
+    {%- for item in cms.caseStudies %}{% if item.featured %}
+    {% include "card.njk" %}
+    {%- endif %}{% endfor %}
+  </div>
+</section>
+<section class="hat">
+  <p class="label">{{ home.hat_label }}</p>
+  <div class="hat-groups">
+    {%- for group in home.hat_groups %}
+    <div class="hat-group">
+      <img src="{{ group.image }}" alt="" width="88" height="100">
+      <ul>{% for i in group.items %}<li>{{ i }}</li>{% endfor %}</ul>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+<section class="skills">
+  <p class="label">{{ home.soft_skills_label }}</p>
+  <p class="skill-list">{% for s in home.soft_skills %}{% if not loop.first %} <span class="dot">•</span> {% endif %}{{ s }}{% endfor %}</p>
+  <p class="label">{{ home.hard_skills_label }}</p>
+  <p class="skill-list">{% for s in home.hard_skills %}{% if not loop.first %} <span class="dot">•</span> {% endif %}{{ s }}{% endfor %}</p>
+</section>
+<section class="say-hi">
+  <p class="lead">{{ home.contact_text }}</p>
+  <a class="accent" href="/contact">{{ home.contact_link }}</a>
+</section>

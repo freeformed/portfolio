@@ -1,0 +1,276 @@
+# Pages CMS (https://app.pagescms.org) editor for freeformed.com.
+# Every save is a commit to GitHub, and Cloudflare publishes it a minute later.
+
+media:
+  input: media
+  output: /media
+
+content:
+  - name: case-studies
+    label: Case studies
+    type: collection
+    path: content/case-studies
+    # The file name becomes the page address, e.g. /case-studies/stamps-com.
+    filename:
+      template: "{title}.md"
+      field: create
+    view:
+      fields: [title, year, featured]
+      primary: title
+      sort: [order, title, year]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: order
+        label: Position in the list
+        description: Lower numbers come first, on the Case Studies page and on the home page.
+        type: number
+      - name: featured
+        label: Show on the home page
+        type: boolean
+      - name: cover
+        label: Cover image
+        description: Used at the top of the page and on the cards. Shown at 4:3.
+        type: image
+        required: true
+      - name: ask
+        label: The ask
+        type: text
+      - name: wins
+        label: The wins
+        type: string
+        list: true
+      - name: services
+        label: Info (also the tags under the card)
+        type: string
+        list: true
+      - name: year
+        label: Year
+        type: string
+      - name: credits
+        label: Credits
+        description: One credit per line.
+        type: text
+      - name: gallery
+        label: Gallery
+        description: Images and videos down the right-hand side, shown at 4:3. Add an image or a video to each item, plus an optional caption.
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Image
+            type: image
+          - name: video
+            label: Video (mp4)
+            type: file
+            options:
+              categories: [video]
+          - name: caption
+            label: Caption
+            type: string
+      - name: next
+        label: Next project
+        description: The project linked at the bottom. Leave empty to use the next one in the list.
+        type: reference
+        options:
+          collection: case-studies
+          value: "{path}"
+          label: "{primary}"
+      - name: description
+        label: Link preview text
+        description: Shown by Google and when the page is shared. Leave empty to use "The ask".
+        type: text
+
+  - name: more-work
+    label: More work
+    type: collection
+    path: content/more-work
+    # The file name becomes the page address, e.g. /more-work/ns-video.
+    filename:
+      template: "{title}.md"
+      field: create
+    view:
+      fields: [title, year]
+      primary: title
+      sort: [order, title, year]
+      default:
+        sort: order
+        order: asc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: year
+        label: Year
+        type: string
+      - name: order
+        label: Position in the list
+        description: Lower numbers come first.
+        type: number
+      - name: intro
+        label: Intro
+        type: text
+      - name: description
+        label: Link preview text
+        description: Shown by Google and when the page is shared. Leave empty to use the intro.
+        type: text
+      - name: body
+        label: Content
+        description: Images and small text. To embed a Vimeo or YouTube video, paste its link on a line of its own.
+        type: rich-text
+        options:
+          format: markdown
+
+  - name: home
+    label: Home page
+    type: file
+    path: content/home.json
+    format: json
+    fields:
+      - { name: title, label: Browser tab title, type: string }
+      - { name: description, label: Link preview text, type: text }
+      - { name: heading, label: Heading, type: text }
+      - { name: subheading, label: Line under the heading, type: string }
+      - { name: work_label, label: Case studies label, type: string }
+      - { name: work_link, label: Case studies link text, type: string }
+      - { name: hat_label, label: '"Under the hat" label', type: string }
+      - name: hat_groups
+        label: '"Under the hat" groups'
+        type: object
+        list: true
+        fields:
+          - { name: image, label: Image, type: image }
+          - { name: items, label: Lines, type: string, list: true }
+      - { name: soft_skills_label, label: Soft skills label, type: string }
+      - { name: soft_skills, label: Soft skills, type: string, list: true }
+      - { name: hard_skills_label, label: Hard skills label, type: string }
+      - { name: hard_skills, label: Hard skills, type: string, list: true }
+      - { name: contact_text, label: Closing text, type: text }
+      - { name: contact_link, label: Closing link text, type: string }
+
+  - name: about
+    label: About page
+    type: file
+    path: content/about.json
+    format: json
+    fields:
+      - { name: title, label: Browser tab title, type: string }
+      - { name: description, label: Link preview text, type: text }
+      - { name: heading, label: Heading, type: string }
+      - { name: info_label, label: Intro label, type: string }
+      - { name: info, label: Intro paragraphs, type: text, list: true }
+      - { name: cv_label, label: CV button text, type: string }
+      - { name: cv, label: CV file (PDF), type: file }
+      - { name: testimonials_label, label: Testimonials label, type: string }
+      - name: testimonials
+        label: Testimonials
+        type: object
+        list: true
+        fields:
+          - { name: quote, label: Quote, type: text }
+          - { name: name, label: Name, type: string }
+          - { name: title, label: Title / company, type: string }
+      - { name: career_label, label: Career label, type: string }
+      - name: career
+        label: Career
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Role, type: string }
+          - { name: place, label: Company, type: string }
+          - { name: dates, label: Dates, type: string }
+      - { name: education_label, label: Education label, type: string }
+      - name: education
+        label: Education
+        type: object
+        list: true
+        fields:
+          - { name: title, label: School, type: string }
+          - { name: place, label: Degree, type: string }
+          - { name: dates, label: Field, type: string }
+      - { name: certifications_label, label: Certifications label, type: string }
+      - name: certifications
+        label: Certifications
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Course, type: string }
+          - { name: place, label: From, type: string }
+          - { name: dates, label: Year, type: string }
+
+  - name: contact
+    label: Contact page
+    type: file
+    path: content/contact.json
+    format: json
+    fields:
+      - { name: title, label: Browser tab title, type: string }
+      - { name: description, label: Link preview text, type: text }
+      - { name: heading, label: Heading, type: string }
+      - { name: mail_label, label: Email label, type: string }
+      - { name: text, label: Text, type: text }
+
+  - name: pages
+    label: Other page text
+    type: file
+    path: content/pages.json
+    format: json
+    fields:
+      - name: case_studies
+        label: Case studies
+        type: object
+        fields:
+          - { name: title, label: Browser tab title, type: string }
+          - { name: description, label: Link preview text, type: text }
+          - { name: heading, label: Heading, type: string }
+          - { name: see_all, label: '"See all works" link', type: string }
+          - { name: next_label, label: '"Next project" label', type: string }
+      - name: more_work
+        label: More work
+        type: object
+        fields:
+          - { name: title, label: Browser tab title, type: string }
+          - { name: description, label: Link preview text, type: text }
+          - { name: heading, label: Heading, type: string }
+          - { name: back, label: '"Back to list" link', type: string }
+          - { name: list_label, label: Label above the list on each page, type: string }
+      - name: not_found
+        label: Page not found (404)
+        type: object
+        fields:
+          - { name: title, label: Browser tab title, type: string }
+          - { name: description, label: Link preview text, type: text }
+          - { name: heading, label: Heading, type: string }
+          - { name: link, label: Link text, type: string }
+
+  - name: site
+    label: Site settings
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - { name: name, label: Name (top left), type: string }
+      - { name: tagline, label: Tagline, type: string }
+      - name: nav
+        label: Menu
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: url, label: Link, type: string }
+      - { name: copyright, label: Footer text, type: string }
+      - { name: email, label: Email address, type: string }
+      - { name: linkedin, label: LinkedIn link, type: string }
+      - { name: behance, label: Behance link, type: string }
+      - { name: url, label: Website address, type: string }
+      - { name: default_description, label: Default link preview text, type: text }
+      - { name: share_image, label: Link preview image (1200×630), type: image }
+      - { name: favicon, label: Browser tab icon, type: image }
+      - { name: apple_touch_icon, label: Home screen icon (iPhone), type: image }
+      - { name: google_analytics, label: Google Analytics ID, type: string }

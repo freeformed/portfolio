@@ -1,0 +1,159 @@
+{
+  "title": "About me",
+  "description": "Learn about the creative mind behind the portfolio. Discover my journey, skills, and passion for innovative design.",
+  "heading": "Who me?",
+  "info_label": "Info",
+  "info": [
+    "Inspiration surrounds us. It fuels our need to create and transform fleeting ideas into tangible expressions.",
+    "When not pushing pixels, I enjoy time at the beach, fishing, family adventures, obscure boardgames, and exploring new eateries. I brew a mean kölsch, and usually have a barolo fermenting in a closet. My dog is weirdly short, missing a few teeth, and I wouldn't have her any other way."
+  ],
+  "cv_label": "Download my CV",
+  "cv": "/media/erin-waddington-cv.pdf",
+  "testimonials_label": "Some nice things",
+  "testimonials": [
+    {
+      "quote": "\"Erin's passion for design, nurtured by his diverse interests, fuels his creativity and helped him inspire his diverse & dynamic in-house agency team.\"",
+      "name": "Diana Holgate",
+      "title": "SVP Marketing / Netspend"
+    },
+    {
+      "quote": "\"I can truly say he is passionate about his job as Creative Director. He always makes sure his team is inspired, briefed and understands the task at hand.\"",
+      "name": "Jennifer Garcia",
+      "title": "Art Director / Netspend"
+    },
+    {
+      "quote": "\"He always raised the bar in terms of design, with an eye toward business goals, and establishing processes to work with a diverse set of marketing stakeholders.\"",
+      "name": "Marc van Bree",
+      "title": "Global Director Partner Marketing / Auctane"
+    },
+    {
+      "quote": "\"…his cross functional work with the acquisitions team was nothing short of commendable. Erin is always willing to challenge assumptions, adapt to new spaces and tech, and innovate at every turn and environment he touched.\"",
+      "name": "David Flynn III",
+      "title": "Director of Performance Marketing / Caribou"
+    },
+    {
+      "quote": "\"Erin is a great business partner who always comes through with great design regardless of whether the ask is big or small with plenty of time or a tight deadline.\"",
+      "name": "Lisa Henken Ramirez",
+      "title": "SVP Operations & Client Success / Indeed"
+    },
+    {
+      "quote": "\"He always came to the table with new ideas and pushed the team to think differently about each project. He blended overall design skills with high level thinking and direction.\"",
+      "name": "Chris Wellington",
+      "title": "Creative Director"
+    },
+    {
+      "quote": "\"There are few people who are expert at executing global creative strategies AND have the ability to manage projects. Erin is on that list of people who have world class creative skills.\"",
+      "name": "Bruce Gardner",
+      "title": "Digital Product Manager / USAA"
+    },
+    {
+      "quote": "\"Erin is a creative and inventive visual thinker and a team player who's always willing to help colleagues in other departments.\"",
+      "name": "Melissa Lipscomb",
+      "title": "VP, Customer Success Leader / ActivTrak"
+    },
+    {
+      "quote": "\"I always felt inspired after leaving a creative kickoff meeting with Erin. His leadership in design and out of the box thinking is a huge strength he brings to the work place.\"",
+      "name": "Harrison Yeager",
+      "title": "Operating Advisor / Elsewhere Partners"
+    },
+    {
+      "quote": "\"Not only is Erin a very gifted designer, he is also an outstanding leader of creative talent.\"",
+      "name": "Jeffrey Anderson",
+      "title": "VP, Growth & Client Strategy / Mighty & True"
+    }
+  ],
+  "career_label": "Career",
+  "career": [
+    {
+      "title": "Design Lead",
+      "place": "PrePass",
+      "dates": "10/2025 - present"
+    },
+    {
+      "title": "Creative Director, Global",
+      "place": "Auctane",
+      "dates": "3/2024 - 10/2024"
+    },
+    {
+      "title": "Creative Director, Group",
+      "place": "Netspend",
+      "dates": "2014 - 2024"
+    },
+    {
+      "title": "Creative Director",
+      "place": "Socialmedia.org",
+      "dates": "2013 - 2014"
+    },
+    {
+      "title": "Assoc. Creative Director",
+      "place": "Somnio",
+      "dates": "2012 - 2013"
+    },
+    {
+      "title": "Sr. Art Director",
+      "place": "Bazaarvoice",
+      "dates": "2010 - 2012"
+    }
+  ],
+  "education_label": "Education",
+  "education": [
+    {
+      "title": "Cornish College of the Arts",
+      "place": "B.F.A.",
+      "dates": "Graphic Design"
+    },
+    {
+      "title": "Seattle Community College",
+      "place": "A.A.",
+      "dates": "Education"
+    },
+    {
+      "title": "Texas Tech University",
+      "place": "Diploma",
+      "dates": "Winemaking"
+    }
+  ],
+  "certifications_label": "Certifications",
+  "certifications": [
+    {
+      "title": "Advanced Creative Thinking and AI",
+      "place": "Imperial College London",
+      "dates": "2025"
+    },
+    {
+      "title": "AI Tools for Creativity",
+      "place": "University of Michigan",
+      "dates": "2025"
+    },
+    {
+      "title": "Agentic AI and AI Agents",
+      "place": "Vanderbilt University",
+      "dates": "2025"
+    },
+    {
+      "title": "Agile Project Management",
+      "place": "Google",
+      "dates": "2025"
+    },
+    {
+      "title": "Foundations of User Experience (UX) Design",
+      "place": "Google",
+      "dates": "2024"
+    },
+    {
+      "title": "Digital Marketing and E-commerce",
+      "place": "Google",
+      "dates": "2023"
+    },
+    {
+      "title": "Social Media Content and Strategy",
+      "place": "Adobe",
+      "dates": "2023"
+    },
+    {
+      "title": "Leading for Creativity",
+      "place": "IDEO U",
+      "dates": "2020"
+    }
+  ]
+}

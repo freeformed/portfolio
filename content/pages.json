@@ -1,0 +1,22 @@
+{
+  "case_studies": {
+    "title": "Projects",
+    "description": "Browse through a curated selection of my best works, showcasing creativity and expertise across various design projects.",
+    "heading": "/ case studies",
+    "see_all": "See all works",
+    "next_label": "Next project"
+  },
+  "more_work": {
+    "title": "More work",
+    "description": "Additional work not in Case Studies",
+    "heading": "/ more work",
+    "back": "back to list",
+    "list_label": "more work"
+  },
+  "not_found": {
+    "title": "Oops! Page Not Found",
+    "description": "Looks like you've ventured into uncharted territory. Let's get you back on track to exploring amazing designs.",
+    "heading": "Ahhh shit. My bad.",
+    "link": "Go back to the homepage"
+  }
+}

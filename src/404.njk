@@ -1,0 +1,15 @@
+---js
+{
+  layout: "base.njk",
+  permalink: "/404.html",
+  bodyClass: "not-found",
+  eleventyComputed: {
+    title: (data) => data.cms?.pages?.not_found?.title,
+    description: (data) => data.cms?.pages?.not_found?.description,
+  },
+}
+---
+<section class="not-found-body">
+  <h1 class="h-display">{{ cms.pages.not_found.heading }}</h1>
+  <a class="accent" href="/">{{ cms.pages.not_found.link }}</a>
+</section>

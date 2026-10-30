@@ -1,0 +1,14 @@
+---js
+{
+  layout: "base.njk",
+  permalink: "/more-work.html",
+  bodyClass: "more-work",
+  eleventyComputed: {
+    title: (data) => data.cms?.pages?.more_work?.title,
+    description: (data) => data.cms?.pages?.more_work?.description,
+  },
+}
+---
+<h1 class="h-page">{{ cms.pages.more_work.heading | escape | string | replace("/", '<span class="slash">/</span>') | safe }}</h1>
+{%- set items = cms.moreWork %}
+{% include "work-list.njk" %}

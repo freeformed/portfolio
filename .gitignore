@@ -1,4 +1,4 @@
 node_modules/
-report/
 .dev.vars
 .wrangler/
+_site/

@@ -3,10 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "capture": "node scripts/capture.mjs",
-    "verify": "node scripts/verify.mjs"
+    "build": "eleventy",
+    "start": "eleventy --serve"
   },
-  "devDependencies": {
-    "playwright": "1.63.0"
+  "dependencies": {
+    "@11ty/eleventy": "3.1.7",
+    "gray-matter": "4.0.3",
+    "image-size": "2.0.4",
+    "markdown-it": "14.3.3"
   }
 }

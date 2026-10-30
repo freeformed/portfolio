@@ -1,0 +1,21 @@
+---js
+{
+  layout: "base.njk",
+  permalink: "/contact.html",
+  bodyClass: "contact",
+  eleventyComputed: {
+    title: (data) => data.cms?.contact?.title,
+    description: (data) => data.cms?.contact?.description,
+  },
+}
+---
+{%- set contact = cms.contact -%}
+<h1 class="h-page offset">{{ contact.heading }}</h1>
+<section class="contact-body">
+  <div class="contact-side">
+    <p>{{ contact.mail_label }}</p>
+    <a class="accent" href="mailto:{{ cms.site.email }}">{{ cms.site.email }}</a>
+    <div class="contact-social">{% include "social.njk" %}</div>
+  </div>
+  <p class="lead">{{ contact.text }}</p>
+</section>

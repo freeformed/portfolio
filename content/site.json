@@ -1,0 +1,32 @@
+{
+  "name": "Erin Waddington",
+  "tagline": "Designer & Creative",
+  "nav": [
+    {
+      "label": "Case Studies",
+      "url": "/case-studies"
+    },
+    {
+      "label": "More Work",
+      "url": "/more-work"
+    },
+    {
+      "label": "About",
+      "url": "/about"
+    },
+    {
+      "label": "Contact",
+      "url": "/contact"
+    }
+  ],
+  "copyright": "© 2026 Erin Waddington",
+  "email": "erin@freeformed.com",
+  "linkedin": "https://www.linkedin.com/in/ewaddington",
+  "behance": "https://www.linkedin.com/in/ewaddington",
+  "url": "https://www.freeformed.com",
+  "share_image": "/media/share-image.png",
+  "favicon": "/media/favicon.png",
+  "apple_touch_icon": "/media/apple-touch-icon.png",
+  "google_analytics": "G-M6S310ERGC",
+  "default_description": "Erin Waddington is designer and creative director Austin, TX"
+}

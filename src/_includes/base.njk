@@ -1,0 +1,59 @@
+{%- set site = cms.site -%}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description or site.default_description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description or site.default_description }}">
+  <meta property="og:image" content="{{ (shareImage or site.share_image) | absolute(site.url) }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url | clean }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description or site.default_description }}">
+  <meta name="twitter:image" content="{{ (shareImage or site.share_image) | absolute(site.url) }}">
+  {%- if page.url != "/404.html" %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url | clean }}">
+  {%- endif %}
+  <link rel="icon" href="{{ site.favicon }}">
+  <link rel="apple-touch-icon" href="{{ site.apple_touch_icon }}">
+  <link rel="preload" href="/fonts/8yoV9pUxquX7VD7ZXlNYKQmkmk.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/fonts/fonts.css">
+  <link rel="stylesheet" href="/css/site.css">
+  {%- if site.google_analytics %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","{{ site.google_analytics }}");</script>
+  {%- endif %}
+</head>
+<body class="page-{{ bodyClass }}">
+  <header class="header" data-header>
+    <div class="header-bar">
+      <a class="logo" href="/">{{ site.name }}</a>
+      <span class="tagline">{{ site.tagline }}</span>
+      <button class="menu-button" type="button" aria-label="Menu" aria-expanded="false" data-menu-button>
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect width="24" height="24" rx="2" fill="currentColor"/><path class="menu-lines" d="M6 8h12M6 12h12M6 16h12" stroke="#000" stroke-width="2"/><path class="menu-close" d="M7 7l10 10M17 7L7 17" stroke="#000" stroke-width="2"/></svg>
+      </button>
+    </div>
+    <nav class="nav" aria-label="Main">
+      <ul>
+        {%- for item in site.nav %}
+        <li><a href="{{ item.url }}">{{ item.label }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+  </header>
+  <main class="main">
+{{ content | safe }}
+  </main>
+  <footer class="footer">
+    <p>{{ site.copyright }}</p>
+    {%- if site.linkedin %}
+    <a class="icon-link" href="{{ site.linkedin }}" target="_blank" rel="noopener">{% include "linkedin.njk" %}LinkedIn</a>
+    {%- endif %}
+  </footer>
+  <script src="/js/site.js" defer></script>
+</body>
+</html>

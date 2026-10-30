@@ -1,0 +1,1019 @@
+/* freeformed.com — matches the original Framer design.
+   Breakpoints follow Framer's: desktop 1200+, tablet 810–1199, phone up to 809. */
+
+:root {
+  --bg: #000;
+  --text: #fff;
+  --cyan: rgb(30, 216, 255);
+  --magenta: rgb(250, 2, 229);
+  --grey: rgb(115, 115, 115);
+  --tag: rgb(191, 191, 191);
+  --quote-meta: rgb(150, 150, 150);
+  --pad: 40px;
+  --max: 1920px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", "Inter Placeholder", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.06em;
+  font-feature-settings: "ss07";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+p,
+ul,
+dl,
+dd,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ---------- Type ---------- */
+
+h1,
+h2,
+.lead,
+.skill-list,
+.cs-info .ask {
+  text-wrap: balance;
+}
+
+.hat-group ul,
+.slides,
+.label.small,
+.rich {
+  font-feature-settings: normal;
+}
+
+.h-page {
+  font-size: 72px;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.h-display {
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: -0.06em;
+}
+
+.lead {
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.06em;
+}
+
+.label {
+  color: var(--cyan);
+}
+
+.label.small {
+  font-family: "Inter Display", "Inter Display Placeholder", sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.accent {
+  color: var(--magenta);
+}
+
+.muted {
+  color: var(--grey);
+}
+
+/* ---------- Header and footer ---------- */
+
+.header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--max);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--pad);
+  background: var(--bg);
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  gap: 39px;
+}
+
+.logo {
+  color: var(--cyan);
+}
+
+.tagline {
+  color: var(--grey);
+}
+
+.menu-button {
+  display: none;
+  color: var(--magenta);
+  width: 24px;
+  height: 24px;
+}
+
+.menu-button svg {
+  display: block;
+}
+
+.menu-close {
+  display: none;
+}
+
+.nav ul {
+  display: flex;
+  gap: 16px;
+}
+
+.nav a {
+  color: var(--magenta);
+}
+
+.main {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 100px var(--pad) 0;
+}
+
+.footer {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 61px var(--pad) 48px;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--grey);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  flex: none;
+}
+
+/* ---------- Case study cards ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 12px;
+}
+
+.card {
+  display: block;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.card h2 {
+  margin-top: 12px;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.06em;
+}
+
+.card .tags {
+  margin-top: 4px;
+  color: var(--tag);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+
+.slash,
+.dot {
+  color: var(--cyan);
+}
+
+/* ---------- Home ---------- */
+
+.hero .lead {
+  margin-top: 24px;
+  max-width: 840px;
+}
+
+.hero h1 {
+  max-width: 840px;
+}
+
+.works {
+  margin-top: 48px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.hat,
+.skills,
+.say-hi {
+  display: grid;
+  grid-template-columns: 35% minmax(0, 680px);
+  margin-top: 120px;
+}
+
+.hat {
+  grid-template-columns: 38.25% 1fr;
+  margin-top: 100px;
+}
+
+.hat-groups {
+  display: grid;
+  gap: 52px;
+}
+
+.hat-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 67px;
+}
+
+.hat-group ul {
+  color: var(--cyan);
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.hat-group img {
+  margin-top: 2px;
+}
+
+.skills {
+  margin-top: 46px;
+  row-gap: 48px;
+}
+
+.say-hi {
+  margin-top: 120px;
+  margin-bottom: 60px;
+}
+
+.say-hi .lead,
+.say-hi a {
+  grid-column: 2;
+}
+
+.say-hi a {
+  margin-top: 47px;
+  justify-self: start;
+}
+
+/* ---------- Case studies list ---------- */
+
+.page-case-studies .main,
+.page-more-work .main,
+.page-about .main,
+.page-contact .main {
+  padding-top: 180px;
+}
+
+.page-case-studies .h-page,
+.page-more-work .h-page {
+  margin-bottom: 48px;
+}
+
+/* ---------- Case study ---------- */
+
+.cs-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.cs-hero .accent {
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.cs-cover {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 48px;
+}
+
+.cs-details {
+  display: grid;
+  grid-template-columns: minmax(0, 348fr) minmax(0, 972fr);
+  gap: 40px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.cs-info {
+  display: grid;
+  gap: 25px;
+}
+
+.cs-info > div:first-child {
+  margin-bottom: 27px;
+}
+
+.cs-info > div:last-child {
+  margin-top: -8px;
+}
+
+.cs-info > div {
+  display: grid;
+  grid-template-columns: 102px minmax(0, 1fr);
+}
+
+.cs-info dt {
+  color: var(--cyan);
+}
+
+.cs-info ul {
+  list-style: disc;
+  padding: 0 14px 0 1.2em;
+}
+
+.cs-gallery {
+  display: grid;
+  gap: 12px;
+}
+
+.cs-gallery img,
+.cs-gallery video {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.cs-gallery .caption {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.cs-next {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 300px;
+}
+
+.cs-next img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* ---------- More work ---------- */
+
+.work-list li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: 36px;
+}
+
+.page-more-work .work-list {
+  margin-bottom: 35px;
+}
+
+.work-list .year {
+  color: var(--grey);
+  flex: none;
+}
+
+.page-more-work-item .main {
+  padding-top: 151px;
+}
+
+.mw-hero {
+  display: grid;
+  grid-template-columns: 25% minmax(0, 1fr);
+}
+
+.mw-hero .back {
+  align-self: start;
+  margin-top: 146px;
+}
+
+.mw-head .muted {
+  margin-bottom: 12px;
+}
+
+.mw-head h1 {
+  max-width: 728px;
+}
+
+.mw-head .lead {
+  margin-top: 48px;
+  max-width: 680px;
+}
+
+.rich {
+  margin: 48px 0 0 25%;
+  font-family: "Inter Variable", "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+
+.rich.no-intro {
+  margin-top: 100px;
+}
+
+.rich > * + * {
+  margin-top: 33.6px;
+}
+
+.rich img {
+  height: auto;
+  border-radius: 4px;
+}
+
+.rich .embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.rich .embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.rich .embed + p {
+  margin-top: 23px;
+}
+
+.rich a {
+  color: var(--magenta);
+}
+
+.mw-more {
+  display: grid;
+  grid-template-columns: 35% minmax(0, 1fr);
+  margin-top: 144px;
+}
+
+/* ---------- About ---------- */
+
+.offset {
+  margin-left: 20%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 20% minmax(0, 1fr);
+  margin-top: 48px;
+}
+
+.row:last-child {
+  margin-bottom: 15px;
+}
+
+.row + .row {
+  margin-top: 76px;
+}
+
+.row:has(.about-links) + .row {
+  margin-top: 126px;
+}
+
+.slider {
+  margin-bottom: 11px;
+}
+
+.about-info {
+  max-width: 680px;
+  display: grid;
+  gap: 20px;
+}
+
+.about-links {
+  display: grid;
+  grid-template-columns: 235px 213px auto;
+  align-items: center;
+  margin-top: 53px;
+}
+
+.about-links .icon-link {
+  color: var(--grey);
+}
+
+.cv-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  justify-self: start;
+  padding: 10px;
+  border-radius: 50px;
+  background: var(--magenta);
+  color: #000;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.slider {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s ease;
+}
+
+.slides li {
+  flex: 0 0 100%;
+  padding: 6px 6px 0;
+}
+
+.slides blockquote {
+  max-width: 500px;
+  font-size: 20px;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+
+.who,
+.who-title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.who {
+  margin-top: 20px;
+}
+
+.who-title {
+  margin-top: 4px;
+  color: var(--quote-meta);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--magenta);
+  opacity: 0.5;
+}
+
+.dots button.active {
+  opacity: 1;
+}
+
+.timeline {
+  display: grid;
+  gap: 36px;
+  margin-top: 24px;
+}
+
+.timeline li {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  align-items: baseline;
+}
+
+.t-meta {
+  color: var(--grey);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* ---------- Contact ---------- */
+
+.page-contact .offset {
+  margin-left: 25%;
+}
+
+.contact-body {
+  display: grid;
+  grid-template-columns: 25% minmax(0, 680px);
+  margin-top: 49px;
+}
+
+.contact-side {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+}
+
+.contact-social {
+  display: grid;
+  gap: 13px;
+  margin-top: 20px;
+}
+
+/* ---------- 404 ---------- */
+
+.page-not-found .main {
+  min-height: calc(100vh - 145px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 0;
+}
+
+.not-found-body {
+  display: grid;
+  justify-items: center;
+  gap: 23px;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1199.98px) {
+  .h-page {
+    font-size: 56px;
+    letter-spacing: -0.06em;
+  }
+
+  .cards {
+    gap: 30px 12px;
+  }
+
+  .page-case-studies .main,
+  .page-more-work .main {
+    padding-top: 120px;
+  }
+
+  .page-about .main,
+  .page-contact .main {
+    padding-top: 100px;
+  }
+
+  .page-home .main {
+    padding-top: 213px;
+  }
+
+  .page-home .cards,
+  .cs-details,
+  .cs-next {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .page-home .cards {
+    gap: 30px;
+  }
+
+  .hat,
+  .skills,
+  .say-hi,
+  .mw-more {
+    grid-template-columns: 35% minmax(0, 1fr);
+  }
+
+  .hat-group {
+    gap: 55px;
+  }
+
+  .page-case-study .main {
+    padding-top: 280px;
+  }
+
+  .cs-hero {
+    display: grid;
+    gap: 24px;
+  }
+
+  .cs-info > div {
+    grid-template-columns: 30% minmax(0, 1fr);
+  }
+
+  .cs-next {
+    margin-top: 300px;
+  }
+
+  .page-more-work-item .main {
+    padding-top: 74px;
+  }
+
+  .mw-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mw-hero .back {
+    display: none;
+  }
+
+  .rich {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Phone ---------- */
+
+@media (max-width: 809.98px) {
+  :root {
+    --pad: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 21px var(--pad) 20px;
+  }
+
+  .header-bar {
+    gap: 0;
+  }
+
+  .menu-button {
+    display: block;
+    margin-left: auto;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .header.open {
+    min-height: 100vh;
+  }
+
+  .header.open .nav {
+    display: block;
+    margin-top: 40px;
+  }
+
+  .header.open .nav ul {
+    flex-direction: column;
+    gap: 33px;
+  }
+
+  .header.open .nav a {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .header.open .menu-lines {
+    display: none;
+  }
+
+  .header.open .menu-close {
+    display: inline;
+  }
+
+  .h-page {
+    font-size: 48px;
+    letter-spacing: -0.06em;
+  }
+
+  .h-display {
+    font-size: 36px;
+  }
+
+  .page-case-studies .main,
+  .page-more-work .main,
+  .page-about .main,
+  .page-contact .main {
+    padding-top: 100px;
+  }
+
+  .page-home .main {
+    padding-top: 170px;
+  }
+
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .page-case-studies .h-page,
+  .page-more-work .h-page {
+    margin-bottom: 48px;
+  }
+
+  .hat,
+  .skills,
+  .say-hi,
+  .mw-more,
+  .row,
+  .contact-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hat .label,
+  .skills .label {
+    margin-bottom: 24px;
+  }
+
+  .hat-groups {
+    margin-top: 24px;
+  }
+
+  .hat-group {
+    justify-content: space-between;
+    gap: 24px;
+    padding-left: 38px;
+  }
+
+  .hat-group ul {
+    width: 163px;
+  }
+
+  .hat-group:nth-child(even) {
+    flex-direction: row-reverse;
+    padding: 0 38px 0 0;
+  }
+
+  .hat-group:nth-child(even) ul {
+    text-align: right;
+  }
+
+  .skills {
+    row-gap: 0;
+  }
+
+  .skills .skill-list + .label {
+    margin-top: 48px;
+  }
+
+  .say-hi .lead,
+  .say-hi a {
+    grid-column: 1;
+  }
+
+  .page-case-study .main {
+    padding-top: 256px;
+  }
+
+  .cs-hero {
+    display: grid;
+    gap: 28px;
+  }
+
+  .cs-cover {
+    margin-top: 24px;
+  }
+
+  .cs-info > div {
+    grid-template-columns: 105px minmax(0, 1fr);
+  }
+
+  .cs-next {
+    margin-top: 200px;
+  }
+
+  .cs-next .h-display {
+    font-size: 36px;
+  }
+
+  .page-more-work-item .main {
+    padding-top: 90px;
+  }
+
+  .mw-head .lead {
+    margin-top: 48px;
+  }
+
+  .mw-more {
+    margin-top: 220px;
+  }
+
+  .mw-more .muted {
+    margin-bottom: 49px;
+  }
+
+  .offset,
+  .page-contact .offset {
+    margin-left: 0;
+  }
+
+  .row .label.small {
+    margin-bottom: 24px;
+  }
+
+  .about-links {
+    grid-template-columns: auto auto auto;
+    margin-top: 53px;
+  }
+
+  .about-links .icon-link {
+    font-size: 0;
+    gap: 0;
+    justify-self: center;
+  }
+
+  .slides blockquote {
+    font-size: 13px;
+    letter-spacing: -0.02em;
+  }
+
+  .timeline li {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 8px;
+    font-size: 16px;
+  }
+
+  .cs-info ul {
+    padding-right: 0;
+  }
+
+  .timeline .t-meta:last-child {
+    grid-column: 2;
+  }
+
+  .contact-body {
+    gap: 40px;
+  }
+
+  .contact-side {
+    order: 2;
+  }
+
+  .footer {
+    font-size: 16px;
+  }
+
+  .footer .icon-link {
+    display: none;
+  }
+}
