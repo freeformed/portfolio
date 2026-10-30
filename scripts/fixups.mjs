@@ -5,6 +5,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const SITE = "https://www.freeformed.com";
 const HIDE_FORMS = "<style data-no-forms>form{display:none!important}</style>";
 
 export function fixup(text) {
@@ -18,6 +19,9 @@ export function fixup(text) {
       // Erin dropped the contact form (it only drew spam); the email link stays.
       // Hidden rather than deleted so Framer's scripts still match the page.
       .replace(/(<\/head>)/, (head) => (text.includes("<form") && !text.includes(HIDE_FORMS) ? HIDE_FORMS + head : head))
+      // Link previews and search engines need full URLs, not site-relative ones.
+      .replace(/(<meta (?:property|name)="(?:og:image|og:url|twitter:image)" content=")\/(?!\/)/g, `$1${SITE}/`)
+      .replace(/(<link rel="canonical" href=")\/(?!\/)/g, `$1${SITE}/`)
       // Footer year, which Framer had baked into every page.
       .replaceAll("© 2025 Erin Waddington", "© 2026 Erin Waddington")
       // Framer's on-page editor bar only makes sense on Framer hosting.
